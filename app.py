@@ -20,7 +20,7 @@ WEEK = "月火水木金土日"
 DISH_RE = re.compile(r"^[①-⑳㉑-㉟]\s*(.+)$")
 DATE_RE = re.compile(r"令和\s*(\d+)\s*年\s*(\d+)\s*月\s*(\d+)\s*日")
 
-st.set_page_config(page_title="給食日誌 変換", page_icon="🍱", layout="centered")
+st.set_page_config(page_title="配食サービス調理指示書 変換", page_icon="🍱", layout="centered")
 
 
 # ---------- ① の読み取り ----------
@@ -105,10 +105,10 @@ def build_workbook(days, s, name_map):
 
 # ---------- 画面 ----------
 def main():
-    st.markdown("## 給食日誌 変換")
-    st.caption("調理用献立表(①)をアップロードすると、給食日誌(②)の書式で書き出します。")
+    st.markdown("## 配食サービス調理指示書 変換")
+    st.caption("調理用献立表をアップロードすると、1日1シートの調理指示書(Excel)に書き出します。")
 
-    up = st.file_uploader("① 調理用献立表(.xlsx)", type=["xlsx"])
+    up = st.file_uploader("調理用献立表(.xlsx)", type=["xlsx"])
 
     with st.expander("設定(あとから変更できます)", expanded=True):
         file_base = st.text_input("ファイル名(あとに「〇月」が付きます)", "配食サービス調理指示書")
@@ -162,7 +162,7 @@ def main():
     )
     fname = f"{file_base}{days[0]['date'].month}月.xlsx"
     st.download_button(
-        "給食日誌をダウンロード(.xlsx)", out, file_name=fname, type="primary",
+        "調理指示書をダウンロード(.xlsx)", out, file_name=fname, type="primary",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     )
 
